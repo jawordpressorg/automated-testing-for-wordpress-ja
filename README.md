@@ -16,3 +16,8 @@ Then run phpunit.
 ```
 $ phpunit
 ```
+
+## Checklist
+
+* [ ] - The length of the excerpt should be 110 in Japanese.
+* [ ] - The length of the excerpt in RSS should be 110 in Japanese.
