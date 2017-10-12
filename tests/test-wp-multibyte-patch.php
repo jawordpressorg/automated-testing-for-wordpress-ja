@@ -55,12 +55,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
     public function setup_postdata( $args )
     {
         global $post;
-        global $wp_query;
 
-        $wp_query->is_singular = true;
-
-        $post_id = $this->factory->post->create( $args );
-        $post = get_post( $post_id );
+        $post = $this->factory->post->create_and_get( $args );
         setup_postdata( $post );
     }
 }
