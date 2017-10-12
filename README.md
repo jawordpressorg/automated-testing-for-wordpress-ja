@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/jawordpressorg/automated-testing-for-wordpress-ja.svg?branch=master)](https://travis-ci.org/jawordpressorg/automated-testing-for-wordpress-ja)
 
-# Run automated testing on the local machine
+## Run automated testing on the local machine
 
 ```
 $ git clone git@github.com:jawordpressorg/automated-testing-for-wordpress-ja.git
