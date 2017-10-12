@@ -5,6 +5,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
     public function setUp()
     {
 		parent::setUp();
+		switch_to_locale( 'ja' );
 	}
 
 	/**
@@ -12,8 +13,6 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	 */
 	function test_length_of_excerpt_should_be_110()
 	{
-		switch_to_locale( 'ja' );
-
         $args = array(
             'post_title' => 'Hello',
             'post_author' => 1,
@@ -33,8 +32,6 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	 */
 	function test_length_of_excerpt_rss_should_be_110()
 	{
-		switch_to_locale( 'ja' );
-
         $args = array(
             'post_title' => 'Hello',
             'post_author' => 1,
