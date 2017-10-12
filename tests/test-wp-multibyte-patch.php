@@ -14,12 +14,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	function test_length_of_excerpt_should_be_110()
 	{
         $args = array(
-            'post_title' => 'Hello',
-            'post_author' => 1,
             'post_content' => str_repeat( 'あ', 200 ),
             'post_excerpt' => '',
-            'post_status' => 'publish',
-            'post_date' => '2014-01-01 00:00:00',
         );
         $this->setup_postdata( $args );
 
@@ -33,12 +29,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	function test_length_of_excerpt_rss_should_be_110()
 	{
         $args = array(
-            'post_title' => 'Hello',
-            'post_author' => 1,
             'post_content' => str_repeat( 'あ', 200 ),
             'post_excerpt' => '',
-            'post_status' => 'publish',
-            'post_date' => '2014-01-01 00:00:00',
         );
         $this->setup_postdata( $args );
 
