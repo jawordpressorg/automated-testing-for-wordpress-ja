@@ -30,4 +30,8 @@ $ phpunit
 * [ ] Incremental search of link in tinymce should fire from 2 chars.
 * [ ] We don't need italic in dashboard.
 
-https://wpdocs.osdn.jp/WordPress_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88%E3%83%81%E3%83%BC%E3%83%A0%E8%B3%87%E6%96%99/%E3%83%86%E3%82%B9%E3%83%88%E9%A0%85%E7%9B%AE
+* https://wpdocs.osdn.jp/WordPress_%E6%97%A5%E6%9C%AC%E8%AA%9E%E7%89%88%E3%83%81%E3%83%BC%E3%83%A0%E8%B3%87%E6%96%99/%E3%83%86%E3%82%B9%E3%83%88%E9%A0%85%E7%9B%AE
+
+## Related
+
+* https://meta.trac.wordpress.org/ticket/3163
