@@ -10,7 +10,6 @@ curl -s $WP_MB_PATCH -o plugin.zip
 unzip plugin.zip -d .plugin
 rm -f plugin.zip
 
-# Language file is used for only getting timezone and other locale settings, so we do not need to update this file. (Probably...)
 curl -s https://downloads.wordpress.org/translation/core/4.8/ja.zip -o ja.zip
 unzip ja.zip -d .lang
 cp -f .lang/* $WP_TESTS_DIR/data/languages/
