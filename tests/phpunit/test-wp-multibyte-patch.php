@@ -5,7 +5,6 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
     public function setUp()
     {
 		parent::setUp();
-		switch_to_locale( 'ja' );
 	}
 
 	/**
