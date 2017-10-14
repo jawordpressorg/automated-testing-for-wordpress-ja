@@ -7,11 +7,6 @@
 
 global $_tests_dir;
 
-
-// TMPDIR=${TMPDIR-/tmp}
-// TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
-// WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
-
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
