@@ -8,6 +8,9 @@ notifications:
   email:
     on_success: never
     on_failure: change
+branches:
+  only:
+    - master
 env:
   matrix:
    - WP_VERSION=latest WP_MULTISITE=0
