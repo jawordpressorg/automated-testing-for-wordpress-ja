@@ -19,7 +19,9 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
         );
         $this->setup_postdata( $args );
 
-        $this->expectOutputString( "<p>" . str_repeat( 'あ', 110 ) . " [&hellip;]</p>\n" );
+		$expect = "<p>" . str_repeat( 'あ', 110 ) . " [&hellip;]</p>\n";
+
+        $this->expectOutputString( $expect );
         the_excerpt();
 	}
 
@@ -34,8 +36,21 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
         );
         $this->setup_postdata( $args );
 
-        $this->expectOutputString( str_repeat( 'あ', 110 ) . " [&#8230;]" );
+		$expect = str_repeat( 'あ', 110 ) . " [&#8230;]";
+
+        $this->expectOutputString( $expect );
         the_excerpt_rss();
+	}
+
+	/**
+	 * The length of the draft's summary should be 40.
+	 */
+	function test_wp_dashboard_recent_drafts_length_should_be_40() {
+		$content = str_repeat( 'あ', 50 );
+		$content_summary = wp_trim_words( $content, 10,  '&hellip;' );
+
+		$expect = str_repeat( 'あ', 40 ) . '&hellip;';
+		$this->assertEquals( $expect, $content_summary );
 	}
 
     /**
@@ -51,15 +66,4 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
         $post = $this->factory->post->create_and_get( $args );
         setup_postdata( $post );
     }
-
-	/**
-	 * The length of the draft's summary should be 40.
-	 */
-	function test_wp_dashboard_recent_drafts_length_should_be_40() {
-		$content = str_repeat( 'あ', 50 );
-		$content_summary = wp_trim_words( $content, 10,  '&hellip;' );
-
-		$expect = str_repeat( 'あ', 40 ) . '&hellip;';
-		$this->assertEquals( $expect, $content_summary );
-	}
 }
