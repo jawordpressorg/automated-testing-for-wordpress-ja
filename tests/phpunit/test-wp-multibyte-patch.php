@@ -43,6 +43,9 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 
 	/**
 	 * The length of the draft's summary should be 40.
+	 *
+     * @runInSeparateProcess
+     * @preserveGlobalState disabled
 	 */
 	function test_wp_dashboard_recent_drafts_length_should_be_40() {
 		define( 'WP_ADMIN', true );
