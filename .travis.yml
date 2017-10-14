@@ -22,4 +22,4 @@ before_script:
 - bash bin/prepare.sh
 - composer install
 script:
-- vendo/bin/phpunit
+- vendor/bin/phpunit
