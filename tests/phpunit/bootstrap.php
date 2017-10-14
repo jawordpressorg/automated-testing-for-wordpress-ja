@@ -1,8 +1,6 @@
 <?php
 /**
  * PHPUnit bootstrap file
- *
- * @package redirect_for_contact_form_7
  */
 
 global $_tests_dir;
@@ -10,7 +8,11 @@ global $_tests_dir;
 $_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $_tests_dir ) {
-	$_tests_dir = '/tmp/wordpress-tests-lib';
+	$_tmpdir = getenv( 'TMPDIR' );
+	if ( ! $_tmpdir ) {
+		$_tmpdir = '/tmp';
+	}
+	$_tests_dir = preg_replace( '#/$#', '', $_tmpdir ) . '/wordpress-tests-lib';
 }
 
 if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
