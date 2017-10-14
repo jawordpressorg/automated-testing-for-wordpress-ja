@@ -2,7 +2,9 @@
 
 set -ex
 
-WP_TESTS_DIR=${WP_TESTS_DIR-/tmp/wordpress-tests-lib}
+TMPDIR=${TMPDIR-/tmp}
+TMPDIR=$(echo $TMPDIR | sed -e "s/\/$//")
+WP_TESTS_DIR=${WP_TESTS_DIR-$TMPDIR/wordpress-tests-lib}
 WP_MB_PATCH=$(curl "https://api.wordpress.org/plugins/info/1.0/wp-multibyte-patch.json" | jq -r .download_link)
 
 sed -i .bak "s|'WPLANG', ''|'WPLANG', 'ja'|" "$WP_TESTS_DIR"/wp-tests-config.php
