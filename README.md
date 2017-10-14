@@ -26,7 +26,7 @@ $ phpunit
 * [ ] Characters in pingback and trackback should not be broken.
 * [ ] The filename which is in Japanese should be encoded md5.
 * [ ] The length of comment in dashboard should be 40.
-* [ ] The length of draft in dashboard should be 40.
+* [x] The length of draft in dashboard should be 40.
 * [ ] Incremental search of link in tinymce should fire from 2 chars.
 * [ ] We don't need italic in dashboard.
 
