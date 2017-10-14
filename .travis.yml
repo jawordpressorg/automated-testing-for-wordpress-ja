@@ -20,5 +20,6 @@ env:
 before_script:
 - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
 - bash bin/prepare.sh
+- composer install
 script:
-- phpunit
+- vendo/bin/phpunit
