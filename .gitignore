@@ -10,3 +10,4 @@ vendor
 composer.lock
 .plugin
 .lang
+.idea
