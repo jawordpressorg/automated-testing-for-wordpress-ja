@@ -57,6 +57,36 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		$this->assertEquals( $expect, $content_summary );
 	}
 
+	/**
+	 * The length of the comment on dashboard should be 40.
+	 */
+	function test_length_of_comment_excerpt_should_be_40()
+	{
+		$post_id = self::factory()->post->create();
+		$args = array(
+			'comment_content' => str_repeat( 'あ', 100 ),
+		);
+
+		$comment_id = self::factory()->comment->create_post_comments( $post_id, 1 , $args );
+		$comment = self::factory()->comment->get_object_by_id( $comment_id[0] );
+		$this->expectOutputString( str_repeat( 'あ', 40 ) . '&hellip;' );
+		comment_excerpt( $comment );
+	}
+
+	/**
+	 * Confirm if italic font has been disabled.
+	 * Just check if it's imported css file.
+	 */
+	function test_if_disabled_italic_font_style()
+	{
+		$multibyte_patch_ext = new multibyte_patch_ext();
+		$multibyte_patch_ext->admin_custom_css();
+
+		$expect = "/wordpress-tests-lib/data/wp-multibyte-patch/ext/ja/admin.css?ver=20131223'";
+
+		$this->assertContains( $expect, get_echo( 'wp_print_styles' ) );
+	}
+
     /**
      * Add post and post be set to current.
      *
