@@ -74,17 +74,14 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	}
 
 	/**
-	 * Confirm if italic font has been disabled.
-	 * Just check if it's imported css file.
+	 * The CSS of the WP multibyte patch should be loaded.
 	 */
-	function test_if_disabled_italic_font_style()
+	function test_css_of_wpmp_should_be_loaded()
 	{
-		$multibyte_patch_ext = new multibyte_patch_ext();
-		$multibyte_patch_ext->admin_custom_css();
+        do_action( 'admin_enqueue_scripts' );
 
-		$expect = "/wordpress-tests-lib/data/wp-multibyte-patch/ext/ja/admin.css?ver=20131223'";
-
-		$this->assertContains( $expect, get_echo( 'wp_print_styles' ) );
+		$this->assertTrue( wp_style_is( 'wpmp-admin-custom' ) );
+		$this->assertContains( 'wpmp-admin-custom', get_echo( 'wp_print_styles' ) );
 	}
 
     /**
