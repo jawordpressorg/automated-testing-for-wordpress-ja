@@ -78,7 +78,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		$multibyte_patch_ext = new multibyte_patch_ext();
 		$multibyte_patch_ext->admin_custom_css();
 
-		$expect = "<link rel='stylesheet' id='wpmp-admin-custom-css'  href='http://example.org/wp-content/plugins/private/var/folders/c4/36002rhx55x_lxlhmz8sg12m0000gn/T/wordpress-tests-lib/data/wp-multibyte-patch/ext/ja/admin.css?ver=20131223' type='text/css' media='all' />";
+		$expect = "/wordpress-tests-lib/data/wp-multibyte-patch/ext/ja/admin.css?ver=20131223'";
 
 		$this->assertContains( $expect, get_echo( 'wp_print_styles' ) );
 	}
