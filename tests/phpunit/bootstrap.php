@@ -1,8 +1,6 @@
 <?php
 /**
  * PHPUnit bootstrap file
- *
- * @package redirect_for_contact_form_7
  */
 
 global $_tests_dir;
