@@ -75,7 +75,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 
 		$this->assertSame( 'hello@example.com', $mailer->get_recipient( 'to' )->address );
 
-		// Subjects should be encoded as MIME header field
+		// Subject should be encoded as MIME header field
 		$this->assertSame(
 			"=?ISO-2022-JP?B?GyRCJDMkcyRLJEEkTxsoQg==?=",
 			$mailer->get_sent()->subject
@@ -98,7 +98,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
      * @runInSeparateProcess
      * @preserveGlobalState disabled
 	 */
-	public function test_wp_dashboard_recent_drafts_length_should_be_40() {
+	public function test_wp_dashboard_recent_drafts_length_should_be_40()
+	{
 		define( 'WP_ADMIN', true );
 
 		$content = str_repeat( 'あ', 50 );
