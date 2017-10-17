@@ -10,7 +10,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	/**
 	 * The length of the excerpt should be 110.
 	 */
-	function test_length_of_excerpt_should_be_110()
+	public function test_length_of_excerpt_should_be_110()
 	{
         $args = array(
             'post_content' => str_repeat( 'あ', 200 ),
@@ -27,7 +27,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	/**
 	 * The length of the excerpt should be 110.
 	 */
-	function test_length_of_excerpt_rss_should_be_110()
+	public function test_length_of_excerpt_rss_should_be_110()
 	{
         $args = array(
             'post_content' => str_repeat( 'あ', 200 ),
@@ -42,12 +42,64 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	}
 
 	/**
+	 * Double-width space should be used as search delimiter.
+	 */
+	public function test_double_width_space_should_be_used_as_search_delimiter()
+	{
+		$_GET['s'] = 'こんにちは　ようこそ';
+
+		$this->factory->post->create( array(
+            'post_content' => 'こんにちは。WordPressへようこそ。',
+		) );
+
+		do_action( 'sanitize_comment_cookies' );
+
+		$q = new WP_Query( array(
+			's' => $_GET['s']
+		) );
+
+		$this->assertTrue( !! count( $q->posts ) );
+	}
+
+	/**
+	 * `wp_mail` should encode as expected
+	 */
+	public function test_wp_mail_should_be_send_as_iso_2022_jp()
+	{
+		$to = 'hello@example.com';
+		$subject = "こんにちは";
+		$message = "日本語のメール";
+		$result = wp_mail( $to, $subject, $message );
+
+		$mailer = tests_retrieve_phpmailer_instance();
+
+		$this->assertSame( 'hello@example.com', $mailer->get_recipient( 'to' )->address );
+
+		// Subject should be encoded as MIME header field
+		$this->assertSame(
+			"=?ISO-2022-JP?B?GyRCJDMkcyRLJEEkTxsoQg==?=",
+			$mailer->get_sent()->subject
+		);
+		$this->assertSame(
+			"こんにちは",
+			iconv_mime_decode( $mailer->get_sent()->subject, 0, 'UTF-8' )
+		);
+
+		// Body should be encoded as ISO-2022-JP
+		$this->assertSame(
+			"日本語のメール\n",
+			mb_convert_encoding( $mailer->get_sent()->body, 'UTF-8', 'ISO-2022-JP' )
+		);
+	}
+
+	/**
 	 * The length of the draft's summary should be 40.
 	 *
      * @runInSeparateProcess
      * @preserveGlobalState disabled
 	 */
-	function test_wp_dashboard_recent_drafts_length_should_be_40() {
+	public function test_wp_dashboard_recent_drafts_length_should_be_40()
+	{
 		define( 'WP_ADMIN', true );
 
 		$content = str_repeat( 'あ', 50 );
@@ -60,7 +112,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	/**
 	 * The length of the comment on dashboard should be 40.
 	 */
-	function test_length_of_comment_excerpt_should_be_40()
+	public function test_length_of_comment_excerpt_should_be_40()
 	{
 		$post_id = self::factory()->post->create();
 		$args = array(
@@ -76,7 +128,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	/**
 	 * The CSS of the WP multibyte patch should be loaded.
 	 */
-	function test_css_of_wpmp_should_be_loaded()
+	public function test_css_of_wpmp_should_be_loaded()
 	{
         do_action( 'admin_enqueue_scripts' );
 
@@ -90,7 +142,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
      * @param  array $args A hash array of the post object.
      * @return none
      */
-    public function setup_postdata( $args )
+    private function setup_postdata( $args )
     {
         global $post;
 
