@@ -21,7 +21,7 @@ $ phpunit
 
 * [x] The length of the excerpt should be 110 in Japanese.
 * [x] The length of the excerpt in RSS should be 110 in Japanese.
-* [ ] Double-width space should be used as search delimiter.
+* [x] Double-width space should be used as search delimiter.
 * [ ] Email should be encoded with ISO-2022-JP
 * [ ] Characters in pingback and trackback should not be broken.
 * [ ] The filename which is in Japanese should be encoded md5.
