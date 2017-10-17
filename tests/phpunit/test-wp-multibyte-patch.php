@@ -62,6 +62,37 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	}
 
 	/**
+	 * `wp_mail` should encode as expected
+	 */
+	public function test_wp_mail_should_be_send_as_iso_2022_jp()
+	{
+		$to = 'hello@example.com';
+		$subject = "こんにちは";
+		$message = "日本語のメール";
+		$result = wp_mail( $to, $subject, $message );
+
+		$mailer = tests_retrieve_phpmailer_instance();
+
+		$this->assertSame( 'hello@example.com', $mailer->get_recipient( 'to' )->address );
+
+		// Subjects should be encoded as MIME header field
+		$this->assertSame(
+			"=?ISO-2022-JP?B?GyRCJDMkcyRLJEEkTxsoQg==?=",
+			$mailer->get_sent()->subject
+		);
+		$this->assertSame(
+			"こんにちは",
+			iconv_mime_decode( $mailer->get_sent()->subject, 0, 'UTF-8' )
+		);
+
+		// Body should be encoded as ISO-2022-JP
+		$this->assertSame(
+			"日本語のメール\n",
+			mb_convert_encoding( $mailer->get_sent()->body, 'UTF-8', 'ISO-2022-JP' )
+		);
+	}
+
+	/**
 	 * The length of the draft's summary should be 40.
 	 *
      * @runInSeparateProcess
