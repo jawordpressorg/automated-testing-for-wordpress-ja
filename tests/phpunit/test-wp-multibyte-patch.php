@@ -64,13 +64,13 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	/**
 	 * `wp_mail` should encode as expected
 	 */
-	public function test_wp_mail_should_be_send_as_iso_2022_jp()
+	public function test_wp_mail_should_be_sent_as_iso_2022_jp()
 	{
 		$to = 'hello@example.com';
 		$subject = "こんにちは";
 		$message = "日本語のメール";
-		$result = wp_mail( $to, $subject, $message );
 
+		wp_mail( $to, $subject, $message );
 		$mailer = tests_retrieve_phpmailer_instance();
 
 		$this->assertSame( 'hello@example.com', $mailer->get_recipient( 'to' )->address );
