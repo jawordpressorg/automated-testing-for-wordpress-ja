@@ -110,7 +110,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
      * @param  array $args A hash array of the post object.
      * @return none
      */
-    public function setup_postdata( $args )
+    private function setup_postdata( $args )
     {
         global $post;
 
