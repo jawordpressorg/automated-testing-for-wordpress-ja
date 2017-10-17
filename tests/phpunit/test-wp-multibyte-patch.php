@@ -58,7 +58,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 			's' => $_GET['s']
 		) );
 
-		$this->assertSame( 1, count( $q->posts ) );
+		$this->assertTrue( !! count( $q->posts ) );
 	}
 
 	/**
