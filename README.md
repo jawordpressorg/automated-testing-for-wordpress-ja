@@ -24,7 +24,7 @@ $ phpunit
 * [x] Double-width space should be used as search delimiter.
 * [x] Email should be encoded with ISO-2022-JP
 * [ ] Characters in pingback and trackback should not be broken.
-* [ ] The filename which is in Japanese should be encoded md5.
+* [x] The filename which is in Japanese should be encoded md5.
 * [x] The length of comment in dashboard should be 40.
 * [x] The length of draft in dashboard should be 40.
 * [ ] Incremental search of link in tinymce should fire from 2 chars.
