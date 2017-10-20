@@ -92,6 +92,9 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		);
 	}
 
+	/**
+	 * Japanese filename should be sanitized as expected.
+	 */
 	public function test_filename_should_be_sanitized_by_md5()
 	{
 		$filename = sanitize_file_name( '日本語.png' );
