@@ -97,8 +97,13 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		$filename = sanitize_file_name( '日本語.png' );
 		$this->assertRegexp( "/^[a-z0-9]{32}\.png$/", $filename );
 
-		$filename = wp_unique_filename( 'path/to', '日本語.jpg' );
-		$this->assertRegexp( "/^[a-z0-9]{32}\.jpg$/", $filename );
+		$dir = wp_upload_dir();
+		$upload_dir = $dir['basedir'];
+		file_put_contents( $upload_dir . '/' . $filename, '' );
+
+		// The filename should be unique
+		$filename = wp_unique_filename( $upload_dir, $filename );
+		$this->assertRegexp( "/^[a-z0-9]{32}\-1\.png$/", $filename );
 	}
 
 	/**
