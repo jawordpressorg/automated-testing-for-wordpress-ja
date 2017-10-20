@@ -92,6 +92,15 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		);
 	}
 
+	public function test_filename_should_be_sanitized_by_md5()
+	{
+		$filename = sanitize_file_name( '日本語.png' );
+		$this->assertRegexp( "/^[a-z0-9]{32}\.png$/", $filename );
+
+		$filename = wp_unique_filename( 'path/to', '日本語.jpg' );
+		$this->assertRegexp( "/^[a-z0-9]{32}\.jpg$/", $filename );
+	}
+
 	/**
 	 * The length of the draft's summary should be 40.
 	 *
