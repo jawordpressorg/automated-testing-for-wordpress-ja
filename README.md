@@ -35,3 +35,13 @@ $ phpunit
 ## Related
 
 * https://meta.trac.wordpress.org/ticket/3163
+
+## Run tests
+
+If you want to run tests manually, please click "Restart build" on the Travis CI.
+
+https://travis-ci.org/jawordpressorg/automated-testing-for-wordpress-ja
+
+![](https://www.evernote.com/l/ABUUweVZK4FBypTjxU8cEvis6fYnfUJIakQB/image.png)
+
+Also, the tests are runinng automatically every day by cron.
