@@ -155,6 +155,64 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		$this->assertContains( 'wpmp-admin-custom', get_echo( 'wp_print_styles' ) );
 	}
 
+	/**
+	 * Pingback should not be broken even if it's commented in Japanese.
+	 */
+	public function test_query_type_pingback_should_not_be_broken() {
+		$post_id = self::factory()->post->create();
+		$post_comment = 'サンプルコメント';
+		$args = array(
+			'comment_post_ID' => $post_id,
+			'comment_approved' => 1,
+			'comment_type' => 'pingback',
+			'comment_content' => $post_comment,
+			'comment_author_url' => 'http://example.com/post/1/',
+			'comment_author' => '投稿者1',
+		);
+
+		self::factory()->comment->create( $args );
+
+		$query = new WP_Comment_Query();
+		$found = $query->query( array(
+			'type' => 'pingback',
+		) );
+
+		$this->assertEquals($post_comment , $found[0]->comment_content );
+
+		$expect = '<a href=\'http://example.com/post/1/\' rel=\'external nofollow\' class=\'url\'>投稿者1</a>';
+		$link_tag = get_comment_author_link( $found[0]->comment_ID );
+		$this->assertEquals( $expect, $link_tag );
+	}
+
+	/**
+	 * Trackback should not be broken even if it's commented in Japanese.
+	 */
+	public function test_query_type_trackback_should_not_be_broken() {
+		$post_id = self::factory()->post->create();
+		$post_comment = 'サンプルコメント';
+		$args = array(
+			'comment_post_ID' => $post_id,
+			'comment_approved' => 1,
+			'comment_type' => 'trackback',
+			'comment_content' => $post_comment,
+			'comment_author_url' => 'http://example.com/post/1/',
+			'comment_author' => '投稿者1',
+		);
+
+		self::factory()->comment->create( $args );
+
+		$query = new WP_Comment_Query();
+		$found = $query->query( array(
+			'type' => 'trackback',
+		) );
+
+		$this->assertEquals( $post_comment, $found[0]->comment_content);
+
+		$expect = '<a href=\'http://example.com/post/1/\' rel=\'external nofollow\' class=\'url\'>投稿者1</a>';
+		$link_tag = get_comment_author_link( $found[0]->comment_ID );
+		$this->assertEquals( $expect, $link_tag );
+	}
+
     /**
      * Add post and post be set to current.
      *
