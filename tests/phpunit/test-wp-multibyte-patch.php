@@ -99,7 +99,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	{
 		$filename = '日本語.png';
 
-		$sanitized = sanitize_file_name( '日本語.png' );
+		$sanitized = sanitize_file_name( $filename );
 		$this->assertSame( "00110af8b4393ef3f72c50be5b332bec.png", $sanitized );
 
 		$dir = wp_upload_dir();
