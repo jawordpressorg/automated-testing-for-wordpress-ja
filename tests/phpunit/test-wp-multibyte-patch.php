@@ -164,6 +164,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 			'comment_approved' => 1,
 			'comment_type' => 'pingback',
 			'comment_content' => $post_comment,
+			'comment_author_url' => 'http://example.com/post/1/',
+			'comment_author' => '投稿者1',
 		);
 
 		self::factory()->comment->create( $args );
@@ -175,7 +177,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 
 		$this->assertEquals($post_comment , $found[0]->comment_content );
 
-		$expect = '<a href=\'http://example.com/42/\' rel=\'external nofollow\' class=\'url\'>Commenter 42</a>';
+		$expect = '<a href=\'http://example.com/post/1/\' rel=\'external nofollow\' class=\'url\'>投稿者1</a>';
 		$link_tag = get_comment_author_link( $found[0]->comment_ID );
 		$this->assertEquals( $expect, $link_tag );
 	}
@@ -191,6 +193,8 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 			'comment_approved' => 1,
 			'comment_type' => 'trackback',
 			'comment_content' => $post_comment,
+			'comment_author_url' => 'http://example.com/post/1/',
+			'comment_author' => '投稿者1',
 		);
 
 		self::factory()->comment->create( $args );
@@ -202,7 +206,7 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 
 		$this->assertEquals( $post_comment, $found[0]->comment_content);
 
-		$expect = '<a href=\'http://example.com/44/\' rel=\'external nofollow\' class=\'url\'>Commenter 44</a>';
+		$expect = '<a href=\'http://example.com/post/1/\' rel=\'external nofollow\' class=\'url\'>投稿者1</a>';
 		$link_tag = get_comment_author_link( $found[0]->comment_ID );
 		$this->assertEquals( $expect, $link_tag );
 	}
