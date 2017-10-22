@@ -97,12 +97,14 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	 */
 	public function test_filename_should_be_sanitized_by_md5()
 	{
-		$filename = sanitize_file_name( '日本語.png' );
-		$this->assertSame( "00110af8b4393ef3f72c50be5b332bec.png", $filename );
+		$filename = '日本語.png';
+
+		$sanitized = sanitize_file_name( '日本語.png' );
+		$this->assertSame( "00110af8b4393ef3f72c50be5b332bec.png", $sanitized );
 
 		$dir = wp_upload_dir();
 		$upload_dir = $dir['basedir'];
-		file_put_contents( $upload_dir . '/' . $filename, '' );
+		file_put_contents( $upload_dir . '/' . $sanitized, '' );
 
 		// The filename should be unique
 		$filename = wp_unique_filename( $upload_dir, $filename );
