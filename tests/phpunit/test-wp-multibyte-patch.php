@@ -93,6 +93,23 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 	}
 
 	/**
+	 * Japanese filename should be sanitized as expected.
+	 */
+	public function test_filename_should_be_sanitized_by_md5()
+	{
+		$filename = sanitize_file_name( '日本語.png' );
+		$this->assertSame( "00110af8b4393ef3f72c50be5b332bec.png", $filename );
+
+		$dir = wp_upload_dir();
+		$upload_dir = $dir['basedir'];
+		file_put_contents( $upload_dir . '/' . $filename, '' );
+
+		// The filename should be unique
+		$filename = wp_unique_filename( $upload_dir, $filename );
+		$this->assertSame( "00110af8b4393ef3f72c50be5b332bec-1.png", $filename );
+	}
+
+	/**
 	 * The length of the draft's summary should be 40.
 	 *
      * @runInSeparateProcess
