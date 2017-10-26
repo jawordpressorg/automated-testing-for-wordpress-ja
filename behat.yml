@@ -1,0 +1,20 @@
+default:
+  autoload: %paths.base%/tests/features/bootstrap
+  suites:
+    default:
+      paths:
+        - %paths.base%/tests/features
+      contexts:
+        - FeatureContext
+        - Behat\MinkExtension\Context\MinkContext
+  translation:
+    locale: en
+  extensions:
+    Behat\MinkExtension:
+      base_url: http://localhost:8080/
+      default_session: default
+      sessions:
+        default:
+          selenium2: ~
+        goutte:
+          goutte: ~
