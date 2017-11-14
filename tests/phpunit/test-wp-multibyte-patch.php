@@ -155,6 +155,22 @@ class WP_Multibyte_Patch_Test extends WP_UnitTestCase
 		$this->assertContains( 'wpmp-admin-custom', get_echo( 'wp_print_styles' ) );
 	}
 
+	public function test_nl_code()
+	{
+		$file = 'http://svn.automattic.com/wordpress-i18n/ja/trunk/dist/wp-config-sample.php';
+		$lines = file( $file );
+		foreach ( $lines as $line ) {
+			$this->assertTrue( !! preg_match( "/\r\n/", $line ) );
+		}
+
+		$file = 'http://svn.automattic.com/wordpress-i18n/ja/trunk/dist/readme.html';
+		$lines = file( $file );
+		foreach ( $lines as $line ) {
+			$this->assertTrue( !! preg_match( "/\n/", $line ) );
+			$this->assertFalse( !! preg_match( "/\r\n/", $line ) );
+		}
+	}
+
     /**
      * Add post and post be set to current.
      *
