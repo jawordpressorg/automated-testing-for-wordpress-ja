@@ -2,6 +2,13 @@
 
 [![Build Status](https://travis-ci.org/jawordpressorg/automated-testing-for-wordpress-ja.svg?branch=master)](https://travis-ci.org/jawordpressorg/automated-testing-for-wordpress-ja)
 
+This project is a testing suite for the WordPress Japanese package.
+
+It is testing for functions of the latest version of `wp-multibyte-patch` plugin in combinations of the following environments.
+
+* PHP 5.6 - 7.2
+* WordPress nightly and latest. (Include multisite)
+
 ## Run automated testing on the local machine
 
 ```
